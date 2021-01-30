@@ -1,34 +1,37 @@
 song1 = "";
 song2 = "";
-leftWristX = 0;
-leftWristY = 0;
-rightWristX = 0;
-rightWristY = 0;
-scoreLeftWrist = 0;
-scoreRightwrist = 0;
-status_song1 = "";
 
 function preload()
 {
-    song1 = loadSound(Saabashiyaan.mp3);
-    song2 = loadSound(Best_Song_Ever-One_Direction.mp3);
+    song1 = loadSound("Saabashiyaan.mp3");
+    song2 = loadSound("Best_Song_Ever-One_Direction.mp3")
 }
 
-function setup()
-{
-    canvas = createCanvas(600, 500);
-    canvas.centre()
+scoreRightWrist = 0;
+scoreLeftWrist = 0;
 
-    video = createCapture(VIDEO);
-    video.hide;
+rightWristX = 0;
+rightWristY = 0;
 
-    poseNet = ml5.poseNet(video, modelLoaded);
-    posenet.on('pose', gotPoses);
+leftWristX = 0;
+leftWristY = 0;
+
+status_song1 = "";
+status_song2 = "";
+
+function setup() {
+	canvas =  createCanvas(600, 500);
+	canvas.center();
+
+	video = createCapture(VIDEO);
+	video.hide();
+
+	poseNet = ml5.poseNet(video, modelLoaded);
+	poseNet.on('pose', gotPoses);
 }
 
-function modeLoaded()
-{
-    console.log('PoseNet is initialized');
+function modelLoaded() {
+  console.log('PoseNet Is Initialized');
 }
 
 function gotPoses(results)
@@ -68,6 +71,18 @@ function draw()
        {
           song1.play();
           document.getElementById("song_name").innerHTML = song1;
+
+       }
+    }
+    if(scoreRightWrist > 0.2)
+    {
+        circle(rightWristX, rightWristY, 20);
+        song1.stop();
+       
+       if(status_song2 = false)
+       {
+          song2.play();
+          document.getElementById("song_name").innerHTML = song2;
 
        }
     }
